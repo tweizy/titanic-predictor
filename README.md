@@ -31,7 +31,7 @@ Short project that trains a few classifiers on the classic Titanic dataset and e
 
 ## Usage (programmatic)
 
-The Flask app exposes an API endpoint (e.g., `/predict`), you can POST a JSON payload containing the required features (Pclass, Sex, Age, Fare, FamilySize, IsAlone) and receive a prediction in response. Example payload shape:
+If the Flask app exposes an API endpoint (e.g., `/predict`), you can POST a JSON payload containing the required features (Pclass, Sex, Age, Fare, FamilySize, IsAlone) and receive a prediction in response. Example payload shape:
 
 ```json
 {
@@ -45,6 +45,14 @@ The Flask app exposes an API endpoint (e.g., `/predict`), you can POST a JSON pa
 ```
 
 The app loads the saved pipeline which performs preprocessing (scaling / one-hot encoding) and returns the predicted class (0/1) and/or probability depending on implementation in `app.py`.
+
+## Deployment
+
+This project is deployed to Render.com and served with Gunicorn. Visit the live application here:
+
+https://titanic-predictor-cvtt.onrender.com/
+
+When deployed, the app uses the same saved scikit-learn pipeline (`titanic_model.pkl`) and the Flask entrypoint (served by Gunicorn, e.g. `gunicorn app:app`). If you change or retrain the model locally, re-upload the new `titanic_model.pkl` to your Render service (or update your deployment) and restart the service to pick up the new model.
 
 ## Contract (inputs / outputs / error modes)
 
